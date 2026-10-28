@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0610">
+<link rel="icon" href="data:,">
+<title>Kazinczy 14 — Neon Ruin FPS</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three.module.js",
+  "three/addons/": "./vendor/addons/"
+} }
+</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="hud" class="hidden">
+  <div id="crosshair"></div>
+  <div id="hitmarker"></div>
+  <div id="topbar">
+    <div id="healthbox"><div id="healthlabel">HP</div><div id="healthbar"><div id="healthfill"></div></div></div>
+    <div id="wave">WAVE 1</div>
+    <div id="score">0</div>
+  </div>
+  <div id="ammo"><span id="ammoNow">24</span><span id="ammoMax">/ 24</span></div>
+  <div id="reloading" class="hidden">RELOADING…</div>
+  <div id="banner"></div>
+  <div id="toast"></div>
+  <div id="damage"></div>
+  <div id="fps"></div>
+  <button id="pauseBtn" class="touch-only" aria-label="Pause">II</button>
+</div>
+
+<div id="touch" class="hidden touch-only">
+  <div id="joyBase"><div id="joyKnob"></div></div>
+  <button id="btnFire" class="tbtn">FIRE</button>
+  <button id="btnJump" class="tbtn small">JUMP</button>
+  <button id="btnReload" class="tbtn small">R</button>
+</div>
+
+<div id="menu" class="overlay">
+  <div class="panel">
+    <div class="plate">VII. ker. Erzsébetváros · <b>Kazinczy utca 14</b></div>
+    <h1>NEON <span>RUIN</span></h1>
+    <p class="sub">The drones have taken the ruin bar. Clear the courtyard, the balconies and the stairwell.</p>
+    <button id="playBtn" class="big">PLAY</button>
+    <div class="row">
+      <button id="qualityBtn">Quality: Auto</button>
+    </div>
+    <div class="controls desktop-only">
+      <b>WASD</b> move · <b>Mouse</b> look · <b>Click</b> shoot · <b>Space</b> jump · <b>Shift</b> sprint · <b>R</b> reload · <b>Q</b> quality · <b>Esc</b> pause
+    </div>
+    <div class="controls touch-only-inline">
+      Left thumb: move · Right thumb: look · <b>FIRE</b> (drag to aim while firing) · <b>JUMP</b> · <b>R</b> reload
+    </div>
+  </div>
+</div>
+
+<div id="pause" class="overlay hidden">
+  <div class="panel">
+    <h2>PAUSED</h2>
+    <button id="resumeBtn" class="big">RESUME</button>
+    <div class="row"><button id="qualityBtn2">Quality: Auto</button><button id="quitBtn">Main menu</button></div>
+  </div>
+</div>
+
+<div id="gameover" class="overlay hidden">
+  <div class="panel">
+    <h2>LAST CALL</h2>
+    <p id="finalScore"></p>
+    <button id="restartBtn" class="big">PLAY AGAIN</button>
+  </div>
+</div>
+
+<div id="rotate" class="overlay">
+  <div class="panel"><div class="phone"></div><h2>Rotate your phone</h2><p class="sub">Neon Ruin plays in landscape.</p></div>
+</div>
+
+<div id="loading" class="overlay"><div class="panel"><h2>Loading…</h2><p id="loaderr" class="sub"></p></div></div>
+
+<script type="module" src="src/main.js"></script>
+<script>
+  window.addEventListener('error', e => { const el = document.getElementById('loaderr'); if (el) el.textContent = 'Error: ' + e.message; });
+</script>
+</body>
+</html>
